@@ -31,46 +31,4 @@ public abstract class Usuario extends Persona {
 		this.password = password;
 	}
 	
-	public Integer getID() {
-		return ID;
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [mail=" + mail + ", password=" + password + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((mail == null) ? 0 : mail.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Usuario other = (Usuario) obj;
-		if (mail == null) {
-			if (other.mail != null)
-				return false;
-		} else if (!mail.equals(other.mail))
-			return false;
-		return true;
-	}
-
-	public boolean loguin(String mail) {
-
-		if(this.mail.equals(mail)){
-			return true;
-		}return false;
-	}
-
-	
 }
