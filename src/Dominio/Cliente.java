@@ -1,23 +1,20 @@
 package Dominio;
 
-public abstract class Cliente extends Usuario {
+public class Cliente extends Usuario {
 
-	private Integer puntosAcumulados;
-	
-	
-	public Cliente(String mail, String password, String nombre, String apellido,Integer ID, Integer puntosAcumulados) {
-		super(mail, password, nombre, apellido, ID);
-		this.puntosAcumulados=0;
-	}
-	
-	
-	public Integer getPuntosAcumulados() {
-		return puntosAcumulados;
+	private Integer factorDePuntos;
+
+	public Cliente(String mail, String password, String nombre, String apellido) {
+		super(mail, password, nombre, apellido);
+		this.factorDePuntos = 60;
 	}
 
+	public Integer getFactorDePuntos() {
+		return factorDePuntos;
+	}
 
-	public void setPuntosAcumulados(Integer puntosAcumulados) {
-		this.puntosAcumulados = puntosAcumulados;
+	public void setFactorDePuntos(Integer factorDePuntos) {
+		this.factorDePuntos = factorDePuntos;
 	}
 
 }

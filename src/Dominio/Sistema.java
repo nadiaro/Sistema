@@ -1,108 +1,65 @@
 package Dominio;
 
 import java.util.ArrayList;
-
+import java.util.LinkedList;
 
 public class Sistema {
-	
+
 	private String nombre;
-	
-	private ArrayList<Producto>listaProductos;
-	private ArrayList<Persona>listaUsuarios;
-	private ArrayList<Compra>listaCompras;
-	
-	
-	
-	public Sistema(String nombre){
-		
-		this.nombre=nombre;
-		this.listaCompras=new ArrayList<Compra>();
-		this.listaProductos=new ArrayList<Producto>();
-		this.listaUsuarios=new ArrayList<Persona>();
-	}
-	
-	
-	public Integer generarID(Cliente cliente){//generar ID para cada cliente
-		Integer ID = 0;
-		Integer idCliente=0;
-		for(int i=1; i<listaUsuarios.size();i++){
-			if(listaUsuarios!=null){
-				if(listaUsuarios.size()>ID){
-					ID=listaUsuarios.size()+1;
-					idCliente=ID;
-				}				
-	}
-	}
-		return idCliente;
-	}
 
-	public Integer generarID(Admin admin){//generar ID para cada admin
-		Integer ID = 0;
-		Integer idAdmin=0;
-		for(int i=1; i<listaUsuarios.size();i++){
-			if(listaUsuarios!=null){
-				if(listaUsuarios.size()>ID){
-					ID=listaUsuarios.size()+1;
-					idAdmin=ID;
-				}				
-	}
-	}
-		return idAdmin;
-	}
+	private LinkedList<Producto> listaProductos;
+	private LinkedList<Usuario> listaUsuarios;
+	private LinkedList<Compra> listaCompras;
 
-    public boolean loguin(Usuario usuario){//loguea un usuario en el sistema y verifica mail
-    		if(!listaUsuarios.contains(usuario.equals(usuario.getMail()))){
-    			return true;
-    		}return false;
-    }    
-	
-    public boolean registrarUsuario(Usuario usuario){//registra un usuario nuevo en la lista de usuarios
-    	if(!listaUsuarios.contains(usuario)){
-    		listaUsuarios.add(usuario);
-    		return true;
-    	}return false;
-    }
-    
-    
-    public void comprar(Cliente cliente, Producto producto){
-    	
-    }
+	public Sistema(String nombre) {
 
-    public void pagar(Producto producto){
-    	
-    }
-	
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
 		this.nombre = nombre;
+		this.listaCompras = new LinkedList<Compra>();
+		this.listaProductos = new LinkedList<Producto>();
+		this.listaUsuarios = new LinkedList<Usuario>();
 	}
 
-	public ArrayList<Producto> getListaProductos() {
-		return listaProductos;
+	public boolean login(String email, String contrasenia) {// loguea un usuario en el sistema y verifica mail
+		for (Usuario lista : this.listaUsuarios) {
+			if (lista.getMail().equals(email) && lista.getPassword().equals(contrasenia))
+				return true;
+		}
+		return false;
 	}
 
-	public void setListaProductos(ArrayList<Producto> listaProductos) {
-		this.listaProductos = listaProductos;
+	public boolean registrarUsuario(Usuario usuario) {// registra un usuario nuevo en la lista de usuarios
+		if (!listaUsuarios.contains(usuario)) {
+			usuario.setID(this.listaUsuarios.size() + 1);
+			listaUsuarios.add(usuario);
+			return true;
+		}
+		return false;
 	}
 
-	public ArrayList<Persona> getListaUsuarios() {
-		return listaUsuarios;
-	}
+	public void comprar(Usuario comprador, Integer cantidad, Producto producto, String medioDePago) {
+		for (Producto lista : this.listaProductos) {
 
-	public void setListaUsuarios(ArrayList<Persona> listaUsuarios) {
-		this.listaUsuarios = listaUsuarios;
+			if (lista.equals(producto)) {
+				Double precioTotal=cantidad*producto.getPrecio();
+				Integer precioTotalPuntos=cantidad*producto.getPrecioPuntos();
+				Integer cantidadDePuntos=(int)(producto.getPrecio()*obtenerFactorDePuntos(comprador));
+				Compra nueva=new Compra(this.listaCompras.size()+1, comprador, producto, cantidad, precioTotal, precioTotalPuntos, medioDePago, cantidadDePuntos);
+				pagar(nueva);
+			}
+		}
 	}
-
-	public ArrayList<Compra> getListaCompras() {
-		return listaCompras;
-	}
-
-	public void setListaCompras(ArrayList<Compra> listaCompras) {
-		this.listaCompras = listaCompras;
-	}
-
 	
+	public Integer obtenerFactorDePuntos(Usuario parametro) {
+		if(parametro instanceof Cliente)
+			return ((Cliente) parametro).getFactorDePuntos();
+		else if(parametro instanceof Admin)
+			return ((Admin) parametro).getFactorDePuntos();
+		else
+			return 0;
+	}
+
+	public void pagar(Compra nueva) {
+
+	}
+
 }

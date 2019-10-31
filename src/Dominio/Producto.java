@@ -1,18 +1,17 @@
 package Dominio;
 
 public class Producto {
-	
+
 	private String descripcion;
 	private Integer codigo;
 	private Double precio;
-	private Integer puntos;
-	
-	
-	public Producto(String descripcion, Integer codigo, Double precio) {
-		this.descripcion=descripcion;
-		this.codigo=codigo;
-		this.precio=precio;
-		this.puntos=0;
+	private Integer precioPuntos;
+
+	public Producto(String descripcion, Integer codigo, Double precio, Integer precioPuntos) {
+		this.descripcion = descripcion;
+		this.codigo = codigo;
+		this.precio = precio;
+		this.precioPuntos = precioPuntos;
 	}
 
 	public String getDescripcion() {
@@ -22,7 +21,6 @@ public class Producto {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
 
 	public Integer getCodigo() {
 		return codigo;
@@ -40,40 +38,12 @@ public class Producto {
 		this.precio = precio;
 	}
 
-	public Integer getPuntos() {
-		return puntos;
+	public Integer getPrecioPuntos() {
+		return precioPuntos;
 	}
 
-	public void setPuntos(Integer puntos) {
-		this.puntos = puntos;
+	public void setPrecioPuntos(Integer precioPuntos) {
+		this.precioPuntos = precioPuntos;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Producto other = (Producto) obj;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
-			return false;
-		return true;
-	}
-
-	
-	
 
 }
