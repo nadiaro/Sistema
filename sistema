@@ -1,0 +1,314 @@
+diff --git a/Empresa/.classpath b/Empresa/.classpath
+new file mode 100644
+index 0000000..63b7e89
+--- /dev/null
++++ b/Empresa/.classpath
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<classpath>
++	<classpathentry kind="src" path="src"/>
++	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
++	<classpathentry kind="output" path="bin"/>
++</classpath>
+diff --git a/Empresa/.gitignore b/Empresa/.gitignore
+new file mode 100644
+index 0000000..ae3c172
+--- /dev/null
++++ b/Empresa/.gitignore
+@@ -0,0 +1 @@
++/bin/
+diff --git a/Empresa/.project b/Empresa/.project
+new file mode 100644
+index 0000000..b343bf5
+--- /dev/null
++++ b/Empresa/.project
+@@ -0,0 +1,17 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<projectDescription>
++	<name>Empresa</name>
++	<comment></comment>
++	<projects>
++	</projects>
++	<buildSpec>
++		<buildCommand>
++			<name>org.eclipse.jdt.core.javabuilder</name>
++			<arguments>
++			</arguments>
++		</buildCommand>
++	</buildSpec>
++	<natures>
++		<nature>org.eclipse.jdt.core.javanature</nature>
++	</natures>
++</projectDescription>
+diff --git a/Empresa/.settings/org.eclipse.jdt.core.prefs b/Empresa/.settings/org.eclipse.jdt.core.prefs
+new file mode 100644
+index 0000000..bb35fa0
+--- /dev/null
++++ b/Empresa/.settings/org.eclipse.jdt.core.prefs
+@@ -0,0 +1,11 @@
++eclipse.preferences.version=1
++org.eclipse.jdt.core.compiler.codegen.inlineJsrBytecode=enabled
++org.eclipse.jdt.core.compiler.codegen.targetPlatform=1.8
++org.eclipse.jdt.core.compiler.codegen.unusedLocal=preserve
++org.eclipse.jdt.core.compiler.compliance=1.8
++org.eclipse.jdt.core.compiler.debug.lineNumber=generate
++org.eclipse.jdt.core.compiler.debug.localVariable=generate
++org.eclipse.jdt.core.compiler.debug.sourceFile=generate
++org.eclipse.jdt.core.compiler.problem.assertIdentifier=error
++org.eclipse.jdt.core.compiler.problem.enumIdentifier=error
++org.eclipse.jdt.core.compiler.source=1.8
+diff --git a/Empresa/src/empresa/Empresa.java b/Empresa/src/empresa/Empresa.java
+new file mode 100644
+index 0000000..f4b8ad7
+--- /dev/null
++++ b/Empresa/src/empresa/Empresa.java
+@@ -0,0 +1,37 @@
++package empresa;
++
++import java.util.ArrayList;
++
++public class Empresa {
++	
++	private String nombre;
++	private ArrayList<Venta>listaventas;
++	
++	
++	public Empresa(String nombre, ArrayList<Venta> listaventas) {
++		this.nombre = nombre;
++		this.listaventas = listaventas;
++	}
++
++
++	public String getNombre() {
++		return nombre;
++	}
++
++
++	public void setNombre(String nombre) {
++		this.nombre = nombre;
++	}
++
++
++	public ArrayList<Venta> getListaventas() {
++		return listaventas;
++	}
++
++
++	public void setListaventas(ArrayList<Venta> listaventas) {
++		this.listaventas = listaventas;
++	}
++
++	
++}
+diff --git a/Empresa/src/empresa/Item.java b/Empresa/src/empresa/Item.java
+new file mode 100644
+index 0000000..d200732
+--- /dev/null
++++ b/Empresa/src/empresa/Item.java
+@@ -0,0 +1,36 @@
++package empresa;
++
++public abstract class Item {
++	
++	private Long ID;
++	private String descripcion;
++	
++	
++	public Item(Long ID, String descripcion) {
++		this.ID = ID;
++		this.descripcion = descripcion;
++	}
++
++
++	public Long getID() {
++		return ID;
++	}
++
++
++	public void setID(Long iD) {
++		ID = iD;
++	}
++
++
++	public String getDescripcion() {
++		return descripcion;
++	}
++
++
++	public void setDescripcion(String descripcion) {
++		this.descripcion = descripcion;
++	}
++	
++	
++
++}
+diff --git a/Empresa/src/empresa/Producto.java b/Empresa/src/empresa/Producto.java
+new file mode 100644
+index 0000000..9a69f04
+--- /dev/null
++++ b/Empresa/src/empresa/Producto.java
+@@ -0,0 +1,22 @@
++package empresa;
++
++public class Producto extends Item{
++	
++	private Double precio;
++
++	public Producto(Long ID, String descripcion, Double precio) {
++		super(ID, descripcion);
++		this.precio = precio;
++	}
++
++	public Double getPrecio() {
++		return precio;
++	}
++
++	public void setPrecio(Double precio) {
++		this.precio = precio;
++	}
++	
++	
++
++}
+diff --git a/Empresa/src/empresa/Servicio.java b/Empresa/src/empresa/Servicio.java
+new file mode 100644
+index 0000000..fd58948
+--- /dev/null
++++ b/Empresa/src/empresa/Servicio.java
+@@ -0,0 +1,38 @@
++package empresa;
++
++public class Servicio extends Item{
++
++	private Integer cantHoras;
++	private Double precioHora;
++	
++	
++	public Servicio(Long ID, String descripcion, Integer cantHoras,
++			Double precioHora) {
++		super(ID, descripcion);
++		this.cantHoras = cantHoras;
++		this.precioHora = precioHora;
++	}
++
++
++	public Integer getCantHoras() {
++		return cantHoras;
++	}
++
++
++	public void setCantHoras(Integer cantHoras) {
++		this.cantHoras = cantHoras;
++	}
++
++
++	public Double getPrecioHora() {
++		return precioHora;
++	}
++
++
++	public void setPrecioHora(Double precioHora) {
++		this.precioHora = precioHora;
++	}
++	
++	
++	
++}
+diff --git a/Empresa/src/empresa/Vendedor.java b/Empresa/src/empresa/Vendedor.java
+new file mode 100644
+index 0000000..d703ae5
+--- /dev/null
++++ b/Empresa/src/empresa/Vendedor.java
+@@ -0,0 +1,42 @@
++package empresa;
++
++public class Vendedor {
++	
++	private String nombre;
++	private String apellido;
++	private final Double PORCENTAJECOMISION=0.30;
++	
++	
++	public Vendedor(String nombre, String apellido) {
++		
++		this.nombre = nombre;
++		this.apellido = apellido;
++	}
++
++
++	public String getNombre() {
++		return nombre;
++	}
++
++
++	public void setNombre(String nombre) {
++		this.nombre = nombre;
++	}
++
++
++	public String getApellido() {
++		return apellido;
++	}
++
++
++	public void setApellido(String apellido) {
++		this.apellido = apellido;
++	}
++
++
++	public Double getPORCENTAJECOMISION() {
++		return PORCENTAJECOMISION;
++	}
++
++	
++}
+diff --git a/Empresa/src/empresa/Venta.java b/Empresa/src/empresa/Venta.java
+new file mode 100644
+index 0000000..fda90ad
+--- /dev/null
++++ b/Empresa/src/empresa/Venta.java
+@@ -0,0 +1,44 @@
++package empresa;
++
++import java.util.Date;
++
++public class Venta {
++
++	private Long venta;
++	private Date fecha;
++	private Integer cantidad;
++	
++	public Venta(Long venta, Date fecha, Integer cantidad){
++		this.venta=venta;
++		this.fecha=new Date();
++		this.cantidad=cantidad;
++	}
++
++	public Long getVenta() {
++		return venta;
++	}
++
++	public void setVenta(Long venta) {
++		this.venta = venta;
++	}
++
++	public Date getFecha() {
++		return fecha;
++	}
++
++	public void setFecha(Date fecha) {
++		this.fecha = fecha;
++	}
++
++	public Integer getCantidad() {
++		return cantidad;
++	}
++
++	public void setCantidad(Integer cantidad) {
++		this.cantidad = cantidad;
++	}
++	
++	
++	
++	
++}

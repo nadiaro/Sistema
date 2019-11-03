@@ -22,33 +22,16 @@ public class Sistema {
 	}
 	
 	
-	public Integer generarID(Cliente cliente){//generar ID para cada cliente
-		Integer ID = 0;
-		Integer idCliente=0;
-		for(int i=1; i<listaUsuarios.size();i++){
-			if(listaUsuarios!=null){
-				if(listaUsuarios.size()>ID){
-					ID=listaUsuarios.size()+1;
-					idCliente=ID;
-				}				
-	}
-	}
-		return idCliente;
-	}
-
-	public Integer generarID(Admin admin){//generar ID para cada admin
-		Integer ID = 0;
-		Integer idAdmin=0;
-		for(int i=1; i<listaUsuarios.size();i++){
-			if(listaUsuarios!=null){
-				if(listaUsuarios.size()>ID){
-					ID=listaUsuarios.size()+1;
-					idAdmin=ID;
-				}				
-	}
-	}
-		return idAdmin;
-	}
+	public void generarId(Usuario usuario){
+			if(!listaUsuarios.contains(usuario)){
+				if(usuario instanceof Cliente){
+					usuario.setID(listaUsuarios.size()+1);
+				} if(usuario instanceof Admin){
+					usuario.setID(listaUsuarios.size()+2);
+				}
+			}
+		}
+	
 
     public boolean loguin(Usuario usuario){//loguea un usuario en el sistema y verifica mail
     		if(!listaUsuarios.contains(usuario.equals(usuario.getMail()))){
@@ -64,12 +47,23 @@ public class Sistema {
     }
     
     
-    public void comprar(Cliente cliente, Producto producto){
-    	
+    public boolean comprar(Compra compra){
+    	if(listaCompras.contains(compra)){
+    		return false;
+    	}
+    		listaCompras.add(compra);
+			return true;
     }
 
-    public void pagar(Producto producto){
-    	
+    public boolean pagar(Compra compra){
+    	Double montoAPagar=0d;
+    	if(listaUsuarios.contains(compra)){
+    		if(montoAPagar>=compra.precioTotalCompra(compra)){
+    		montoAPagar-=compra.precioTotalCompra(compra);
+    		return true;
+    		}
+    	}
+    	return false;
     }
 	
 	public String getNombre() {

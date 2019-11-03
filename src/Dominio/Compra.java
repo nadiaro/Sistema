@@ -15,9 +15,9 @@ public class Compra {
 		this.num=num;
 	}
 	
-	public Double calcularPrecioTotalCompra(Compra listaCompras){
+	public Double precioTotalCompra(Compra compra){
 		Double precioTotal=0.0;
-		if(producto.getPrecio().equals(producto.getPrecio())){
+		if(producto.getCodigo().equals(producto)){
 			precioTotal=producto.getPrecio()*cantidad;
 		}return precioTotal;
 		

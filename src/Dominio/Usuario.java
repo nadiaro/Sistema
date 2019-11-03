@@ -12,7 +12,7 @@ public abstract class Usuario extends Persona {
 		super(nombre, apellido);
 		this.mail=mail;
 		this.password=password;
-		this.ID=ID;
+		this.ID=0;
 	}
 	
 	public String getMail() {
@@ -30,5 +30,14 @@ public abstract class Usuario extends Persona {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	public Integer getID() {
+		return ID;
+	}
+
+	public void setID(Integer iD) {
+		ID = iD;
+	}
+	
 	
 }
