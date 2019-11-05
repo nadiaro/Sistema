@@ -19,21 +19,33 @@ public class Sistema {
 		this.listaUsuarios = new LinkedList<Usuario>();
 	}
 
-	public boolean login(String email, String contrasenia) {// loguea un usuario en el sistema y verifica mail
+//	public boolean login(String email, String contrasenia) throws loginIncorrectoException {// loguea un usuario en el sistema y verifica mail
+//		for (Usuario lista : this.listaUsuarios) {
+//			if (lista.getMail().equals(email) && lista.getPassword().equals(contrasenia))
+//				return true;
+//		}
+//		throw new loginIncorrectoException();
+//	}
+	
+	public boolean login(String email, String contrasenia) throws loginIncorrectoException, contraseniaIncorrectaException {// loguea un usuario en el sistema y verifica mail
 		for (Usuario lista : this.listaUsuarios) {
-			if (lista.getMail().equals(email) && lista.getPassword().equals(contrasenia))
-				return true;
+			if (lista.getMail().equals(email)) {
+				if(lista.getPassword().equals(contrasenia))
+					return true;
+				else
+					throw new contraseniaIncorrectaException();
+			}
 		}
-		return false;
+		throw new loginIncorrectoException();
 	}
 
-	public boolean registrarUsuario(Usuario usuario) {// registra un usuario nuevo en la lista de usuarios
+	public boolean registrarUsuario(Usuario usuario)throws usuarioExistenteException  {// registra un usuario nuevo en la lista de usuarios
 		if (!listaUsuarios.contains(usuario)) {
 			usuario.setID(this.listaUsuarios.size() + 1);
 			listaUsuarios.add(usuario);
 			return true;
 		}
-		return false;
+		throw new usuarioExistenteException("El usuario ya existe");
 	}
 
 	public void comprar(Usuario comprador, Integer cantidad, Producto producto, String medioDePago) {
@@ -59,7 +71,7 @@ public class Sistema {
 	}
 
 	public void pagar(Compra nueva) {
-
+		
 	}
 
 }
