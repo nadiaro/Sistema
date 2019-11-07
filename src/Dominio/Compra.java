@@ -4,34 +4,21 @@ public class Compra {
 	
 	private Cliente cliente;
 	private Producto producto;
+	private Integer IdCompra;
 	private Integer cantidad;
-	private Integer num;
+	private Integer cantidadPuntos;
+	private Integer medioPago;
 	
-	
-	public Compra(Cliente cliente, Producto producto, Integer num, Integer cantidad) {
+	public Compra(Cliente cliente, Producto producto, Integer IdCompra, Integer cantidad, Integer cantidadPuntos, Integer medioPago) {
 		this.cliente=cliente;
 		this.producto=producto;
+		this.IdCompra=IdCompra;
 		this.cantidad=cantidad;
-		this.num=num;
-	}
-	
-	public Double precioTotalCompra(Compra compra){
-		Double precioTotal=0.0;
-		if(producto.getCodigo().equals(producto)){
-			precioTotal=producto.getPrecio()*cantidad;
-		}return precioTotal;
-		
+		this.cantidadPuntos=cantidadPuntos;
+		this.medioPago=medioPago;
 	}
 	
 	
-	public Integer getCantidad() {
-		return cantidad;
-	}
-
-	public void setCantidad(Integer cantidad) {
-		this.cantidad = cantidad;
-	}
-
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -47,13 +34,50 @@ public class Compra {
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
-	
-	public Integer getNum() {
-		return num;
+
+
+	public Integer getIdCompra() {
+		return IdCompra;
 	}
 
-	public void setNum(Integer num) {
-		this.num = num;
+
+	public void setIdCompra(Integer idCompra) {
+		IdCompra = idCompra;
 	}
+
+
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+
+
+	public Integer getCantidadPuntos() {
+		return cantidadPuntos;
+	}
+
+
+	public void setCantidadPuntos(Integer cantidadPuntos) {
+		this.cantidadPuntos = cantidadPuntos;
+	}
+	
+	
+	
+	public Integer getMedioPago() {
+		return medioPago;
+	}
+
+
+	public void setMedioPago(Integer medioPago) {
+		this.medioPago = medioPago;
+	}
+
+
+
+	
 
 }

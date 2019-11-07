@@ -1,6 +1,7 @@
 package Dominio;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 public class Sistema {
@@ -13,59 +14,86 @@ public class Sistema {
 	
 	
 	
-	public Sistema(String nombre){
+	public Sistema(String nombre){//constructor
 		
 		this.nombre=nombre;
 		this.listaCompras=new ArrayList<Compra>();
 		this.listaProductos=new ArrayList<Producto>();
 		this.listaUsuarios=new ArrayList<Persona>();
+}
+	
+	public boolean loguin(Usuario usuario){//loguea un usuario en el sistema y verifica mail
+		if(!listaUsuarios.contains(usuario.equals(usuario.getMail()))){
+			return true;
+		}return false;
+}    
+
+	public boolean registrarUsuario(Usuario usuario){//registra un usuario nuevo en la lista de usuarios
+		if(!listaUsuarios.contains(usuario)){
+		listaUsuarios.add(usuario);
+		return true;
+		}
+		return false;
+}
+
+	
+	 public boolean agregarCompra(Compra nuevo){//agrega una compra a la lista de compras
+			if(!listaCompras.contains(nuevo)){
+				return listaCompras.add(nuevo);
+			}else return false;
+		}
+
+	 public boolean pagar(Compra compra){
+	    	Double montoAPagar=0d;
+	    	if(listaUsuarios.contains(compra)){
+	    		if(montoAPagar>=compra.getProducto().getPrecio()){
+	    		montoAPagar-=compra.getProducto().getPrecio();
+	    		return true;
+	    		}
+	    	}
+	    	return false;
+}
+	
+	public boolean eliminarCompra(Integer IdCompra){//elimina una compra de la lista de compras
+		Iterator<Compra>it=listaCompras.iterator();
+		while(it.hasNext()){
+			Compra listaCompras=it.next();
+			if(listaCompras.getIdCompra().equals(IdCompra));
+			it.remove();
+			return true;
+		}
+		return false;
 	}
 	
-	
-	public void generarId(Usuario usuario){
-			if(!listaUsuarios.contains(usuario)){
-				if(usuario instanceof Cliente){
-					usuario.setID(listaUsuarios.size()+1);
-				} if(usuario instanceof Admin){
-					usuario.setID(listaUsuarios.size()+2);
-				}
-			}
-		}
-	
-
-    public boolean loguin(Usuario usuario){//loguea un usuario en el sistema y verifica mail
-    		if(!listaUsuarios.contains(usuario.equals(usuario.getMail()))){
-    			return true;
-    		}return false;
-    }    
-	
-    public boolean registrarUsuario(Usuario usuario){//registra un usuario nuevo en la lista de usuarios
-    	if(!listaUsuarios.contains(usuario)){
-    		listaUsuarios.add(usuario);
-    		return true;
-    	}return false;
-    }
-    
-    
-    public boolean comprar(Compra compra){
-    	if(listaCompras.contains(compra)){
-    		return false;
-    	}
-    		listaCompras.add(compra);
+	public boolean eliminarCliente(String mail){//elimina un cliente de la lista de clientes por su mail
+		Iterator<Persona>it=listaUsuarios.iterator();
+		while(it.hasNext()){
+			Cliente listaUsuarios=(Cliente) it.next();
+			if(listaUsuarios.getMail().equals(mail));
+			it.remove();
 			return true;
-    }
-
-    public boolean pagar(Compra compra){
-    	Double montoAPagar=0d;
-    	if(listaUsuarios.contains(compra)){
-    		if(montoAPagar>=compra.precioTotalCompra(compra)){
-    		montoAPagar-=compra.precioTotalCompra(compra);
-    		return true;
-    		}
-    	}
-    	return false;
-    }
+		}
+		return false;
+	}
 	
+	public boolean agregarProducto(Producto nuevo){//agrega un producto a la lista de productos
+		if(!listaProductos.contains(nuevo)){
+			return listaProductos.add(nuevo);
+		}else return false;
+	}
+	
+	public boolean eliminarProducto(Producto producto){//elimina un producto de la lista de productos
+		Iterator<Producto>it=listaProductos.iterator();
+		while(it.hasNext()){
+			Producto listaProductos=it.next();
+			if(listaProductos.getCodigo().equals(producto.getCodigo()));
+			it.remove();
+			return true;
+		}
+		return false;
+	}
+    
+      
 	public String getNombre() {
 		return nombre;
 	}

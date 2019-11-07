@@ -3,12 +3,15 @@ package Dominio;
 public abstract class Cliente extends Usuario {
 
 	private Integer puntosAcumulados;
+	private Integer Id;
 	
 	
-	public Cliente(String mail, String password, String nombre, String apellido,Integer ID, Integer puntosAcumulados) {
-		super(mail, password, nombre, apellido, ID);
+	public Cliente(String mail, String password, String nombre, String apellido,Integer puntosAcumulados, Integer Id) {
+		super(mail, password, nombre, apellido);
 		this.puntosAcumulados=0;
+		this.Id=0;
 	}
+	
 	
 	
 	public Integer getPuntosAcumulados() {
@@ -18,6 +21,16 @@ public abstract class Cliente extends Usuario {
 
 	public void setPuntosAcumulados(Integer puntosAcumulados) {
 		this.puntosAcumulados = puntosAcumulados;
+	}
+
+
+	public Integer getId() {
+		return Id;
+	}
+
+
+	public void setId(Integer id) {
+		Id = id;
 	}
 
 }
