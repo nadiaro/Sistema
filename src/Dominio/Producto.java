@@ -5,14 +5,14 @@ public class Producto {
 	private String descripcion;
 	private Integer codigo;
 	private Double precio;
-	private Integer puntos;
+	private Integer valorPuntos;
 	
 	
-	public Producto(String descripcion, Integer codigo, Double precio) {
+	public Producto(String descripcion, Integer codigo, Double precio, Integer valorPuntos) {
 		this.descripcion=descripcion;
 		this.codigo=codigo;
 		this.precio=precio;
-		this.puntos=0;
+		this.valorPuntos=valorPuntos;
 	}
 
 	public String getDescripcion() {
@@ -40,12 +40,12 @@ public class Producto {
 		this.precio = precio;
 	}
 
-	public Integer getPuntos() {
-		return puntos;
+	public Integer getValorPuntos() {
+		return valorPuntos;
 	}
 
-	public void setPuntos(Integer puntos) {
-		this.puntos = puntos;
+	public void setValorPuntos(Integer valorPuntos) {
+		this.valorPuntos = valorPuntos;
 	}
 
 	@Override
@@ -71,6 +71,12 @@ public class Producto {
 		} else if (!codigo.equals(other.codigo))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Producto [descripcion=" + descripcion + ", codigo=" + codigo
+				+ ", precio=" + precio + ", valorPuntos=" + valorPuntos + "]";
 	}
 
 	

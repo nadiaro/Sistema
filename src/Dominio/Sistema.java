@@ -22,12 +22,6 @@ public class Sistema {
 		this.listaUsuarios=new ArrayList<Persona>();
 }
 	
-	public boolean loguin(Usuario usuario){//loguea un usuario en el sistema y verifica mail
-		if(!listaUsuarios.contains(usuario.equals(usuario.getMail()))){
-			return true;
-		}return false;
-}    
-
 	public boolean registrarUsuario(Usuario usuario){//registra un usuario nuevo en la lista de usuarios
 		if(!listaUsuarios.contains(usuario)){
 		listaUsuarios.add(usuario);
@@ -35,15 +29,31 @@ public class Sistema {
 		}
 		return false;
 }
-
 	
+	public boolean loguin(Usuario usuario)throws Exception {//loguea un usuario en el sistema y verifica mail
+		if(!listaUsuarios.contains(usuario.getMail().equals(usuario.getMail()))){
+			return true;
+		} throw new usuarioInexistenteException("usuario inexistente");
+}    
+
 	 public boolean agregarCompra(Compra nuevo){//agrega una compra a la lista de compras
 			if(!listaCompras.contains(nuevo)){
 				return listaCompras.add(nuevo);
 			}else return false;
-		}
+}
+	 
+	 public boolean eliminarCompra(Integer IdCompra){//elimina una compra de la lista de compras
+			Iterator<Compra>it=listaCompras.iterator();
+			while(it.hasNext()){
+				Compra listaCompras=it.next();
+				if(listaCompras.getIdCompra().equals(IdCompra));
+				it.remove();
+				return true;
+			}
+			return false;
+}
 
-	 public boolean pagar(Compra compra){
+	 public boolean pagar(Compra compra){//efectua el pago de una compra
 	    	Double montoAPagar=0d;
 	    	if(listaUsuarios.contains(compra)){
 	    		if(montoAPagar>=compra.getProducto().getPrecio()){
@@ -53,17 +63,6 @@ public class Sistema {
 	    	}
 	    	return false;
 }
-	
-	public boolean eliminarCompra(Integer IdCompra){//elimina una compra de la lista de compras
-		Iterator<Compra>it=listaCompras.iterator();
-		while(it.hasNext()){
-			Compra listaCompras=it.next();
-			if(listaCompras.getIdCompra().equals(IdCompra));
-			it.remove();
-			return true;
-		}
-		return false;
-	}
 	
 	public boolean eliminarCliente(String mail){//elimina un cliente de la lista de clientes por su mail
 		Iterator<Persona>it=listaUsuarios.iterator();

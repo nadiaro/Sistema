@@ -7,15 +7,18 @@ public class Compra {
 	private Integer IdCompra;
 	private Integer cantidad;
 	private Integer cantidadPuntos;
-	private Integer medioPago;
 	
-	public Compra(Cliente cliente, Producto producto, Integer IdCompra, Integer cantidad, Integer cantidadPuntos, Integer medioPago) {
+	
+	public Compra(Cliente cliente, Producto producto, Integer IdCompra, Integer cantidad, Integer cantidadPuntos) {
 		this.cliente=cliente;
 		this.producto=producto;
 		this.IdCompra=IdCompra;
 		this.cantidad=cantidad;
 		this.cantidadPuntos=cantidadPuntos;
-		this.medioPago=medioPago;
+	}
+	
+	public enum medioPago{
+		EFECTIVO, PUNTOS;
 	}
 	
 	
@@ -67,17 +70,15 @@ public class Compra {
 	
 	
 	
-	public Integer getMedioPago() {
-		return medioPago;
-	}
-
-
-	public void setMedioPago(Integer medioPago) {
-		this.medioPago = medioPago;
-	}
-
-
-
+//	public Integer getMedioPago() {
+//		return medioPago;
+//	}
+//
+//
+//	public void setMedioPago(Integer medioPago) {
+//		this.medioPago = medioPago;
+//	}
+//
 	
 
 }
