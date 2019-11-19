@@ -7,21 +7,24 @@ public class Compra {
 	private Integer IdCompra;
 	private Integer cantidad;
 	private Integer cantidadPuntos;
+	private String formaPago;
+	private Integer puntosAcumulados;
+	private Double precioTotalVenta;
 	
 	
-	public Compra(Cliente cliente, Producto producto, Integer IdCompra, Integer cantidad, Integer cantidadPuntos) {
+	public Compra(Cliente cliente, Producto producto, Integer IdCompra, Integer cantidad, Integer cantidadPuntos, String formaPago) {
 		this.cliente=cliente;
 		this.producto=producto;
 		this.IdCompra=IdCompra;
 		this.cantidad=cantidad;
 		this.cantidadPuntos=cantidadPuntos;
+		this.formaPago=formaPago;
+		this.puntosAcumulados=cantidad*producto.getValorPuntos();
+		this.precioTotalVenta=cantidad*producto.getPrecio();
+		
 	}
 	
-	public enum medioPago{
-		EFECTIVO, PUNTOS;
-	}
-	
-	
+		
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -67,18 +70,39 @@ public class Compra {
 	public void setCantidadPuntos(Integer cantidadPuntos) {
 		this.cantidadPuntos = cantidadPuntos;
 	}
+
+
+	public String getFormaPago() {
+		return formaPago;
+	}
+
+
+	public void setFormaPago(String formaPago) {
+		this.formaPago = formaPago;
+	}
+
+
+	public Integer getPuntosAcumulados() {
+		return puntosAcumulados;
+	}
+
+
+	public void setPuntosAcumulados(Integer puntosAcumulados) {
+		this.puntosAcumulados = puntosAcumulados;
+	}
+
+
+	public Double getPrecioTotalVenta() {
+		return precioTotalVenta;
+	}
+
+
+	public void setPrecioTotalVenta(Double precioTotalVenta) {
+		this.precioTotalVenta = precioTotalVenta;
+	}
 	
 	
 	
-//	public Integer getMedioPago() {
-//		return medioPago;
-//	}
-//
-//
-//	public void setMedioPago(Integer medioPago) {
-//		this.medioPago = medioPago;
-//	}
-//
 	
 
 }

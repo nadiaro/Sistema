@@ -1,41 +1,52 @@
 package Dominio;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 public class Sistema {
 	
 	private String nombre;
 	
-	private ArrayList<Producto>listaProductos;
-	private ArrayList<Persona>listaUsuarios;
-	private ArrayList<Compra>listaCompras;
+	private Set<Producto>listaProductos;
+	private Set <Usuario>listaUsuarios;
+	private List<Compra>listaCompras;
 	
 	
 	
 	public Sistema(String nombre){//constructor
 		
 		this.nombre=nombre;
-		this.listaCompras=new ArrayList<Compra>();
-		this.listaProductos=new ArrayList<Producto>();
-		this.listaUsuarios=new ArrayList<Persona>();
+		this.listaCompras=new ArrayList<Compra>();//polimorfismo
+		this.listaProductos=new TreeSet<Producto>();
+		this.listaUsuarios=new HashSet<Usuario>();
 }
 	
-	public boolean registrarUsuario(Usuario usuario){//registra un usuario nuevo en la lista de usuarios
+	public boolean registrarUsuario(Usuario usuario)throws Exception{//registra un usuario nuevo en la lista de usuarios
 		if(!listaUsuarios.contains(usuario)){
 		listaUsuarios.add(usuario);
+		usuario.setId(listaUsuarios.size()+1);//genera Id para cada tipo de usuario
 		return true;
 		}
-		return false;
+		throw new usuarioExistenteException("el usuario ya existe");
 }
 	
-	public boolean loguin(Usuario usuario)throws Exception {//loguea un usuario en el sistema y verifica mail
-		if(!listaUsuarios.contains(usuario.getMail().equals(usuario.getMail()))){
-			return true;
-		} throw new usuarioInexistenteException("usuario inexistente");
-}    
+	public boolean loguin(String mail, String password)throws Exception{//loguea un usuario en el sistema y verifica mail y contrasenia
+		for(Usuario c:listaUsuarios){
+			if(c.getMail().equals(mail)){
+				if(c.getPassword().equals(password)){
+					return true;
+				}
+			}
+		}
+		throw new usuarioOContraseniaInvalidoException("Error de logueo");
+		}
 
+	
 	 public boolean agregarCompra(Compra nuevo){//agrega una compra a la lista de compras
 			if(!listaCompras.contains(nuevo)){
 				return listaCompras.add(nuevo);
@@ -64,16 +75,16 @@ public class Sistema {
 	    	return false;
 }
 	
-	public boolean eliminarCliente(String mail){//elimina un cliente de la lista de clientes por su mail
-		Iterator<Persona>it=listaUsuarios.iterator();
+	public boolean eliminarCliente(String mail)throws Exception{//elimina un cliente de la lista de clientes por su mail
+		Iterator<Usuario>it=listaUsuarios.iterator();
 		while(it.hasNext()){
 			Cliente listaUsuarios=(Cliente) it.next();
 			if(listaUsuarios.getMail().equals(mail));
 			it.remove();
 			return true;
 		}
-		return false;
-	}
+		throw new clienteInexistenteException();
+}
 	
 	public boolean agregarProducto(Producto nuevo){//agrega un producto a la lista de productos
 		if(!listaProductos.contains(nuevo)){
@@ -92,8 +103,7 @@ public class Sistema {
 		return false;
 	}
     
-      
-	public String getNombre() {
+    public String getNombre() {
 		return nombre;
 	}
 
@@ -101,29 +111,30 @@ public class Sistema {
 		this.nombre = nombre;
 	}
 
-	public ArrayList<Producto> getListaProductos() {
+	public Set<Producto> getListaProductos() {
 		return listaProductos;
 	}
 
-	public void setListaProductos(ArrayList<Producto> listaProductos) {
+	public void setListaProductos(Set<Producto> listaProductos) {
 		this.listaProductos = listaProductos;
 	}
 
-	public ArrayList<Persona> getListaUsuarios() {
+	public Set<Usuario> getListaUsuarios() {
 		return listaUsuarios;
 	}
 
-	public void setListaUsuarios(ArrayList<Persona> listaUsuarios) {
+	public void setListaUsuarios(Set<Usuario> listaUsuarios) {
 		this.listaUsuarios = listaUsuarios;
 	}
 
-	public ArrayList<Compra> getListaCompras() {
+	public List<Compra> getListaCompras() {
 		return listaCompras;
 	}
 
-	public void setListaCompras(ArrayList<Compra> listaCompras) {
+	public void setListaCompras(List<Compra> listaCompras) {
 		this.listaCompras = listaCompras;
 	}
 
+	
 	
 }

@@ -1,6 +1,9 @@
 package Dominio;
 
-public class Producto {
+import java.util.Comparator;
+
+
+public class Producto implements Comparator<Producto>{
 	
 	private String descripcion;
 	private Integer codigo;
@@ -79,7 +82,16 @@ public class Producto {
 				+ ", precio=" + precio + ", valorPuntos=" + valorPuntos + "]";
 	}
 
-	
-	
+
+	@Override
+	public int compare(Producto a, Producto b) {
+		if(a.getCodigo().compareTo(b.getCodigo())==0){
+			return 0;
+		} if(a.getCodigo().compareTo(b.getCodigo())==1){
+			return 1;
+		}else{
+			return -1;
+		}
+	}
 
 }
