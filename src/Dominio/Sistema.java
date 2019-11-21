@@ -28,8 +28,8 @@ public class Sistema {
 	
 	public boolean registrarUsuario(Usuario usuario)throws Exception{//registra un usuario nuevo en la lista de usuarios
 		if(!listaUsuarios.contains(usuario)){
-		listaUsuarios.add(usuario);
 		usuario.setId(listaUsuarios.size()+1);//genera Id para cada tipo de usuario
+		listaUsuarios.add(usuario);
 		return true;
 		}
 		throw new usuarioExistenteException("el usuario ya existe");
@@ -57,21 +57,26 @@ public class Sistema {
 			Iterator<Compra>it=listaCompras.iterator();
 			while(it.hasNext()){
 				Compra listaCompras=it.next();
-				if(listaCompras.getIdCompra().equals(IdCompra));
+				if(listaCompras.getIdCompra().equals(IdCompra))
 				it.remove();
 				return true;
 			}
 			return false;
 }
 
-	 public boolean pagar(Compra compra){//efectua el pago de una compra
-	    	Double montoAPagar=0d;
-	    	if(listaUsuarios.contains(compra)){
-	    		if(montoAPagar>=compra.getProducto().getPrecio()){
-	    		montoAPagar-=compra.getProducto().getPrecio();
-	    		return true;
+	 public boolean pagar(Integer IdCompra, Integer cantidadPuntos){//efectua el pago de una compra con puntos
+	    	for(Compra u:this.listaCompras){
+		 if(u.getIdCompra().equals(IdCompra)){
+			 for(Usuario x:listaUsuarios){
+	    		if(x.equals(u.getCliente())){
+	    			if(x.getPuntosTotales()>=cantidadPuntos){
+	    				u.getCliente().setPuntosTotales(u.getCliente().getPuntosTotales()-cantidadPuntos);
+	    			return true;
 	    		}
-	    	}
+	    		}
+		 }
+   		}
+   	}
 	    	return false;
 }
 	
@@ -79,7 +84,7 @@ public class Sistema {
 		Iterator<Usuario>it=listaUsuarios.iterator();
 		while(it.hasNext()){
 			Cliente listaUsuarios=(Cliente) it.next();
-			if(listaUsuarios.getMail().equals(mail));
+			if(listaUsuarios.getMail().equals(mail))
 			it.remove();
 			return true;
 		}
@@ -96,7 +101,7 @@ public class Sistema {
 		Iterator<Producto>it=listaProductos.iterator();
 		while(it.hasNext()){
 			Producto listaProductos=it.next();
-			if(listaProductos.getCodigo().equals(producto.getCodigo()));
+			if(listaProductos.getCodigo().equals(producto.getCodigo()))
 			it.remove();
 			return true;
 		}
